@@ -105,16 +105,17 @@ However, we can provide a rough summary of the features included in each CUDA SD
     - Cooperative Launch, Surface Object Management, Version Management
 
 ### What libraries does HIP support?
-HIP includes growing support for the four key math libraries using hcBlas, hcFft, hcrng and hcsparse, as well as MIOpen for machine intelligence applications.
-These offer pointer-based memory interfaces (as opposed to opaque buffers) and can be easily interfaced with other HIP applications.
+HIP includes growing support for key math libraries using hipBLAS, hipSOLVER, hipFFT, hipSPARSE, and rocRAND, as well as MIOpen for machine intelligence applications.
+These offer pointer-based memory interfaces (as opposed to opaque buffers) and can be easily interfaced with other HIP applications.  
 The hip interfaces support both ROCm and CUDA paths, with familiar library interfaces.
 
-- [hipBlas](https://github.com/ROCmSoftwarePlatform/hipBLAS), which utilizes [rocBlas](https://github.com/ROCmSoftwarePlatform/rocBLAS).
-- [hipfft](https://github.com/ROCmSoftwarePlatform/hcFFT)
-- [hipsparse](https://github.com/ROCmSoftwarePlatform/hcSPARSE)
-- [hiprng](https://github.com/ROCmSoftwarePlatform/hcrng)
+- [hipBLAS](https://github.com/ROCmSoftwarePlatform/hipBLAS), which uses [rocBLAS](https://github.com/ROCmSoftwarePlatform/rocBLAS)
+- [hipSOLVER](https://github.com/ROCmSoftwarePlatform/hipSOLVER), which uses [rocSOLVER](https://github.com/ROCmSoftwarePlatform/rocSOLVER)
+- [hipFFT](https://github.com/ROCmSoftwarePlatform/hipFFT), which uses [rocFFT](https://github.com/ROCmSoftwarePlatform/rocFFT)
+- [hipSPARSE](https://github.com/ROCmSoftwarePlatform/hipSPARSE), which uses [rocSPARSE](https://github.com/ROCmSoftwarePlatform/rocSPARSE)
+- [rocRAND](https://github.com/ROCmSoftwarePlatform/rocRAND)
 
-Additionally, some of the cublas routines are automatically converted to hipblas equivalents by the HIPIFY tools. These APIs use cublas or hcblas depending on the platform and replace the need to use conditional compilation.
+Additionally, some of the cublas routines are automatically converted to hipblas equivalents by the HIPIFY tools. These APIs use cublas or rocblas depending on the platform and replace the need to use conditional compilation.
 
 ### How does HIP compare with OpenCL?
 Both AMD and Nvidia support OpenCL 1.2 on their devices so that developers can write portable code.
