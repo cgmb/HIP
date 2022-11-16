@@ -28,7 +28,7 @@
 - [How do I trace HIP application flow?](#how-do-i-trace-hip-application-flow)
 - [What if HIP generates an error of "symbol multiply defined!" only on AMD machine?](#what-if-hip-generates-error-of-symbol-multiply-defined-only-on-amd-machine)
 - [What is maximum limit of Generic kernel launching parameter?](#what-is-maximum-limit-of-generic-kernel-launching-parameter)
-- [Are _shfl_*_sync functions supported on HIP platform?](#are-_shfl_*_sync-functions-supported-on-hip-platform)
+- [Are `__shfl_*_sync` functions supported on HIP platform?](#are-__shfl__sync-functions-supported-on-hip-platform)
 - [How to create a guard for code that is specific to the host or the GPU?](#how-to-create-a-guard-for-code-that-is-specific-to-the-host-or-the-gpu)
 - [Why _OpenMP is undefined when compiling with -fopenmp?](#why-_openmp-is-undefined-when-compiling-with--fopenmp)
 - [Does the HIP-Clang compiler support extern shared declarations?](#does-the-hip-clang-compiler-support-extern-shared-declarations)
@@ -226,7 +226,7 @@ hipErrorToCudaError
 hipCUDAErrorTohipError
 hipCUResultTohipError
 
-If platform portability is important, use #ifdef __HIP_PLATFORM_NVIDIA__ to guard the CUDA-specific code.
+If platform portability is important, use `#ifdef __HIP_PLATFORM_NVIDIA__` to guard the CUDA-specific code.
 
 ### How do I trace HIP application flow?
 See the [HIP Logging](hip_logging.md) for more information.
@@ -235,8 +235,8 @@ See the [HIP Logging](hip_logging.md) for more information.
 Product of block.x, block.y, and block.z should be less than 1024.
 Please note, HIP does not support kernel launch with total work items defined in dimension with size gridDim x blockDim >= 2^32, so gridDim.x * blockDim.x, gridDim.y * blockDim.y and gridDim.z * blockDim.z are always less than 2^32.
 
-### Are __shfl_*_sync functions supported on HIP platform?
-__shfl_*_sync is not supported on HIP but for nvcc path CUDA 9.0 and above all shuffle calls get redirected to it's sync version.
+### Are `__shfl_*_sync` functions supported on HIP platform?
+`__shfl_*_sync` is not supported on HIP but for nvcc path CUDA 9.0 and above all shuffle calls get redirected to its sync version.
 
 ### How to create a guard for code that is specific to the host or the GPU?
 The compiler defines the `__HIP_DEVICE_COMPILE__` macro only when compiling the code for the GPU.  It could be used to guard code that is specific to the host or the GPU.
@@ -249,7 +249,8 @@ When compiling an OpenMP source file with `hipcc -fopenmp`, the compiler may gen
 Previously, it was essential to declare dynamic shared memory using the HIP_DYNAMIC_SHARED macro for accuracy, as using static shared memory in the same kernel could result in overlapping memory ranges and data-races.
 
 Now, the HIP-Clang compiler provides support for extern shared declarations, and the HIP_DYNAMIC_SHARED option is no longer required. You may use the standard extern definition:
-extern __shared__ type var[];
+
+    extern __shared__ type var[];
 
 ### I have multiple HIP enabled devices and I am getting an error message hipErrorNoBinaryForGpu Unable to find code object for all current devices?
 
@@ -278,7 +279,7 @@ Besides, per-thread default stream be enabled per translation unit, users can co
 
 HIP version definition has been updated since ROCm 4.2 release as the following:
 
-HIP_VERSION=HIP_VERSION_MAJOR * 10000000 + HIP_VERSION_MINOR * 100000 + HIP_VERSION_PATCH)
+    HIP_VERSION=HIP_VERSION_MAJOR * 10000000 + HIP_VERSION_MINOR * 100000 + HIP_VERSION_PATCH)
 
 HIP version can be queried from HIP API call,
 hipRuntimeGetVersion(&runtimeVersion);
